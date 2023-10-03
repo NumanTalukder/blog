@@ -68,10 +68,10 @@ export default function Home() {
     },
   ]
   return (
-    <main className='bg-blue-50/75 px-20 py-6'>
+    <main className='bg-blue-50/75 px-6 md:px-20 py-6'>
       <div className='flex justify-between flex-wrap gap-8'>
         {blogs.map((blog) => (
-          <div className='bg-white w-[320px] rounded-xl shadow-md'>
+          <div className='card bg-white rounded-xl shadow-md'>
             <Image
               src={blog.img}
               width={500}
