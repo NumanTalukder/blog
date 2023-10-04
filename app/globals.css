@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 .card {
+  @apply bg-white rounded-xl shadow-md;
   max-width: 18%;
-  /* flex: 1; */
 }
 
 @media screen and (max-width: 1460px) {
