@@ -12,7 +12,7 @@ const Navbar = () => {
   return (
     <header className='w-full shadow-md'>
       <nav className='flex items-center justify-between px-6 py-4 md:px-20 md:py-6'>
-        <h1 className='text-2xl font-bold text-indigo-600'>Blog</h1>
+        <h1 className='text-2xl font-bold text-violet-600'>Blog</h1>
         <input
           type='text'
           placeholder='Search'

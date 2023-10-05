@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-color: @apply bg-indigo-500;
+}
+
 .card {
   @apply bg-white rounded-xl shadow-md;
   max-width: 18%;
