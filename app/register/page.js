@@ -28,7 +28,11 @@ const Register = () => {
         headers: {
           'Content-type': 'application/json',
         },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+        }),
       })
 
       if (res.ok) {
@@ -75,12 +79,12 @@ const Register = () => {
             className='w-full p-2 px-4 border border-violet-500 mt-4 rounded-3xl'
           />
 
-          <Button
-            variant='contained'
-            className='rounded-3xl bg-violet-500 mt-4'
+          <button
+            // variant='contained'
+            className='rounded-3xl bg-violet-500 text-white mt-4 px-4 py-2'
           >
             Register
-          </Button>
+          </button>
         </form>
       </div>
     </main>

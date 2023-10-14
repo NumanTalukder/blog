@@ -6,8 +6,10 @@ import { NextResponse } from 'next/server'
 export const POST = async (req) => {
   try {
     const { name, email, password } = await req.json()
+    console.log(name, email, password)
 
     const user = User.findOne({ email }).select('_id')
+    console.log(user)
 
     if (user) {
       console.log('this email is taken')
