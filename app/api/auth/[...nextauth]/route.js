@@ -1,6 +1,6 @@
 import User from '@/model/user'
 import { connectToDB } from '@/utils/database'
-import nextAuth from 'next-auth'
+import nextAuth from 'next-auth/next'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import bcrypt from 'bcryptjs'
 

@@ -42,13 +42,13 @@ const Register = () => {
         redirect('/')
       }
     } catch (error) {
-      console.log(error)
+      console.log(`front end error: ${error}`)
     }
   }
 
   return (
     <main className='flex flex-col items-center justify-center h-screen'>
-      <div className='login-container flex flex-col gap-4 w-96'>
+      <div className='login-container flex flex-col gap-4 px-10 md:w-96'>
         <div className='flex items-center justify-between'>
           <h1 className='text-3xl font-bold'>Register</h1>
           <Link href='login' className='text-gray-600'>
@@ -81,7 +81,7 @@ const Register = () => {
 
           <button
             // variant='contained'
-            className='rounded-3xl bg-violet-500 text-white mt-4 px-4 py-2'
+            className='rounded-3xl bg-violet-500 text-white w-full mt-4 px-4 py-2'
           >
             Register
           </button>
