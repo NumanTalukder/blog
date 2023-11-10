@@ -1,10 +1,14 @@
 'use client'
 
+import { useState } from 'react'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 import Link from 'next/link'
-import { useState } from 'react'
 
 const Navbar = () => {
+  const { data: session } = useSession()
+  const isLoggedIn = Boolean(session?.user)
+
   const [search, setSearch] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
   const [isDropDown, setIsDropDown] = useState(false)
@@ -28,15 +32,38 @@ const Navbar = () => {
             onClick={() => setIsDropDown(!isDropDown)}
           />
           {isDropDown && (
-            <div className='z-50 absolute w-40 mt-40 right-0 space-y-2 py-2 bg-white border rounded-lg transition-all duration-300'>
-              <ul>
-                <li className='text-black px-4 py-2 cursor-pointer hover:bg-gray-100 hover:text-green-500'>
-                  <Link href='/login'>Login</Link>
-                </li>
-                <li className='text-black px-4 py-2 cursor-pointer hover:bg-gray-100 hover:text-green-500'>
-                  <Link href='/register'>Register</Link>
-                </li>
-              </ul>
+            <div className='z-50 absolute w-60 mt-40 right-0 space-y-2 py-2 bg-white border rounded-lg transition-all duration-300'>
+              {isLoggedIn ? (
+                <div className='flex flex-col items-start gap-3 px-4'>
+                  <p className='text-black py-2 border-b'>
+                    Hi {session.user.name}!
+                  </p>
+                  <Link href='/create-post'>Create Post</Link>
+                  <Link href='/dashboard'>Dashboard</Link>
+                  <Link href='/user-info'>Account Settings</Link>
+                  <button
+                    onClick={signOut}
+                    className='text-black py-2 cursor-pointe hover:text-green-500'
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <button
+                    onClick={signIn}
+                    className='text-black px-4 py-2 cursor-pointer hover:bg-gray-100 hover:text-green-500'
+                  >
+                    Login
+                  </button>
+                  <Link
+                    href='/register'
+                    className='text-black px-4 py-2 cursor-pointer hover:bg-gray-100 hover:text-green-500'
+                  >
+                    Register
+                  </Link>
+                </>
+              )}
             </div>
           )}
         </div>

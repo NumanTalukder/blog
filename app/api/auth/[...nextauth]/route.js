@@ -1,39 +1,72 @@
-import User from '@/model/user'
-import { connectToDB } from '@/utils/database'
-import nextAuth from 'next-auth/next'
-import CredentialsProvider from 'next-auth/providers/credentials'
+import NextAuth from 'next-auth/next'
+import CredentialsProviders from 'next-auth/providers/credentials'
+import User from '@/models/User'
+import { signJwtToken } from '@/lib/jwt'
 import bcrypt from 'bcryptjs'
+import db from '@/lib/db'
 
-export const authOptions = {
+const handler = NextAuth({
   providers: [
-    CredentialsProvider({
-      name: 'credentials',
-      credentials: {},
-
-      async authorize(credentials) {
+    CredentialsProviders({
+      type: 'credentials',
+      credentials: {
+        email: {
+          label: 'Email',
+          type: 'text',
+          placeholder: 'example@email.com',
+        },
+        password: { label: 'Password', type: 'password' },
+      },
+      async authorize(credentials, req) {
         const { email, password } = credentials
 
-        await connectToDB()
-        const user = User.findOne({ email })
+        await db.connect()
+
+        const user = await User.findOne({ email })
 
         if (!user) {
-          console.log('user not found!')
-          return
+          throw new Error('User not found!')
         }
 
-        const matchPass = bcrypt.compare(password, user.password)
+        const comparePass = await bcrypt.compare(password, user.password)
 
-        if (!matchPass) {
-          console.log('password did not match')
-          return
+        if (!comparePass) {
+          throw new Error('Wrong Password!')
+        } else {
+          const { password, ...others } = user._doc
+
+          const accessToken = signJwtToken(others, { expiresIn: '7d' })
+
+          return {
+            ...others,
+            accessToken,
+          }
         }
-
-        return user
       },
     }),
   ],
-}
 
-const handler = nextAuth(authOptions)
+  pages: {
+    signIn: '/login',
+  },
+
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.accessToken = user.accessToken
+        token._id = user._id
+      }
+      return token
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.user.accessToken = token.accessToken
+        session.user._id = token._id
+      }
+
+      return session
+    },
+  },
+})
 
 export { handler as GET, handler as POST }

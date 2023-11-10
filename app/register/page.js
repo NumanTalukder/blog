@@ -2,22 +2,15 @@
 
 import { ArrowForward } from '@mui/icons-material'
 import Button from '@mui/material/Button'
-import { getServerSession } from 'next-auth'
 import Link from 'next/link'
 import { useState } from 'react'
-import { authOptions } from '../api/auth/[...nextauth]/route'
 import { redirect } from 'next/navigation'
+import toast, { Toaster } from 'react-hot-toast'
 
 const Register = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
-  // const session = await getServerSession(authOptions)
-
-  // if (session) {
-  //   redirect('/')
-  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -26,7 +19,7 @@ const Register = () => {
       const res = await fetch('/api/register', {
         method: 'POST',
         headers: {
-          'Content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           name,
@@ -34,6 +27,9 @@ const Register = () => {
           password,
         }),
       })
+
+      const data = await res.json()
+      toast(data.message)
 
       if (res.ok) {
         setName('')
@@ -87,6 +83,7 @@ const Register = () => {
           </button>
         </form>
       </div>
+      <Toaster />
     </main>
   )
 }

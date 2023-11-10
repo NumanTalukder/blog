@@ -6,6 +6,10 @@
   --primary-color: @apply bg-indigo-500;
 }
 
+.navlink-hover {
+  
+}
+
 .card {
   @apply bg-white rounded-xl shadow-md;
   max-width: 18%;
