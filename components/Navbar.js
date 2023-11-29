@@ -17,8 +17,10 @@ const Navbar = () => {
 
   return (
     <header className='w-full shadow-md'>
-      <nav className='flex items-center justify-between px-6 py-4 md:px-20 md:py-6'>
-        <h1 className='text-2xl font-bold text-violet-600'>Blog</h1>
+      <nav className='flex items-center justify-between px-6 py-4 lg:px-14 lg:py-6'>
+        <Link href={'/'} className='text-2xl font-bold text-violet-600'>
+          Blog
+        </Link>
         <input
           type='text'
           placeholder='Search'
@@ -28,11 +30,11 @@ const Navbar = () => {
         />
         <div className='flex relative items-center gap-2'>
           <AccountCircleOutlinedIcon
-            className='text-3xl cursor-pointer'
+            className='text-5xl cursor-pointer'
             onClick={() => setIsDropDown(!isDropDown)}
           />
           {isDropDown && (
-            <div className='z-50 absolute w-60 mt-40 right-0 space-y-2 py-2 bg-white border rounded-lg transition-all duration-300'>
+            <div className='z-50 absolute w-60 mt-60 right-8 space-y-2 py-2 bg-white border rounded-lg shadow-lg transition-all duration-300'>
               {isLoggedIn ? (
                 <div className='flex flex-col items-start gap-3 px-4'>
                   <p className='text-black py-2 border-b'>
@@ -69,7 +71,7 @@ const Navbar = () => {
         </div>
       </nav>
       <div className='border-b w-full'></div>
-      <div className='flex items-center justify-center gap-6 py-2'>
+      <div className='flex items-center justify-center gap-6 py-3'>
         {categories.map((category) => (
           <p
             key={category}

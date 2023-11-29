@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <section className='bg-gray-800 flex items-center justify-between px-6 md:px-20 py-4'>
+    <section className='bg-gray-800 flex items-center justify-between px-6 lg:px-14 py-4'>
       <p className='text-white'>© All rights reserved</p>
       <p className='text-white'>
         Developed by{' '}
