@@ -1,3 +1,4 @@
+import Card from '@/components/Card'
 import Image from 'next/image'
 
 const Post = () => {
@@ -81,7 +82,19 @@ const Post = () => {
     <main className='bg-blue-50/75 md:px-20 md:py-6'>
       {/* post section */}
 
-      <section className='bg-white flex flex-col items-center justify-center w-full md:max-w-6xl mx-auto md:mt-5 md:rounded-3xl md:shadow-md'>
+      <section className='bg-white flex flex-col items-center justify-center gap-5 w-full md:max-w-6xl mx-auto md:mt-5 p-4 md:p-14 md:rounded-3xl md:shadow-md'>
+        <div className='flex flex-col items-center justify-center gap-5'>
+          <h1 className='text-6xl text-center font-semi my-2 mx-auto'>
+            {blog.title}
+          </h1>
+          <div className='flex items-center justify-between w-full'>
+            <p className='text-gray-500'>Category: {blog.category}</p>
+            <p className='text-gray-500 border rounded-2xl p-2 px-4'>
+              Author: {blog.creator}
+            </p>
+            <p className='text-gray-500'>Date: {blog.creationDate}</p>
+          </div>
+        </div>
         <Image
           src={blog.img}
           width={500}
@@ -89,44 +102,16 @@ const Post = () => {
           style={{ minWidth: '100%', height: 'auto' }}
           className='md:rounded-t-3xl'
         />
-        <div className='px-6'>
-          <h1 className='text-4xl text-center font-bold my-2 mx-auto'>
-            {blog.title}
-          </h1>
-          <div className='flex items-center justify-between my-2'>
-            <p className='text-gray-500'>Category: {blog.category}</p>
-            <p className='text-gray-500 border rounded-2xl p-1'>
-              Author: {blog.creator}
-            </p>
-            <p className='text-gray-500'>Date: {blog.creationDate}</p>
-          </div>
-          <p className='text-justify'>{blog.desc}</p>
-        </div>
+        <p className='text-justify'>{blog.desc}</p>
       </section>
 
       {/* related post section */}
 
       <section className='mt-20 px-4 md:px-0 flex flex-col'>
         <h1 className='text-4xl font-bold text-center mb-10'>Related Post</h1>
-        <div className='flex justify-between flex-wrap gap-8'>
+        <div className='grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6'>
           {blogs.map((blog) => (
-            <div className='card'>
-              <Image
-                src={blog.img}
-                width={500}
-                height={500}
-                style={{ minWidth: '100%', height: 'auto' }}
-                className='rounded-t-xl'
-              />
-              <div className='px-4 py-2 overflow-hidden'>
-                <h1 className='font-bold text-center'>{blog.title}</h1>
-              </div>
-              <div className='flex gap-3 mt-2 px-4'>
-                <p className='text-gray-500'>{blog.category}</p>
-                <p className='text-gray-500'>{blog.creator}</p>
-                <p className='text-gray-500'>{blog.creationDate}</p>
-              </div>
-            </div>
+            <Card blog={blog} />
           ))}
         </div>
       </section>
