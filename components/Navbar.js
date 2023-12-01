@@ -37,12 +37,30 @@ const Navbar = () => {
             <div className='z-50 absolute w-60 mt-60 right-8 space-y-2 py-2 bg-white border rounded-lg shadow-lg transition-all duration-300'>
               {isLoggedIn ? (
                 <div className='flex flex-col items-start gap-3 px-4'>
-                  <p className='text-black py-2 border-b'>
+                  <p
+                    className='text-black py-2 border-b'
+                    onClick={() => setIsDropDown(!isDropDown)}
+                  >
                     Hi {session.user.name}!
                   </p>
-                  <Link href='/create-post'>Create Post</Link>
-                  <Link href='/dashboard'>Dashboard</Link>
-                  <Link href='/user-info'>Account Settings</Link>
+                  <Link
+                    href='/create-post'
+                    onClick={() => setIsDropDown(!isDropDown)}
+                  >
+                    Create Post
+                  </Link>
+                  <Link
+                    href='/dashboard'
+                    onClick={() => setIsDropDown(!isDropDown)}
+                  >
+                    Dashboard
+                  </Link>
+                  <Link
+                    href='/user-info'
+                    onClick={() => setIsDropDown(!isDropDown)}
+                  >
+                    Account Settings
+                  </Link>
                   <button
                     onClick={signOut}
                     className='text-black py-2 cursor-pointe hover:text-green-500'

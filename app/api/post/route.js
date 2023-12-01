@@ -1,12 +1,10 @@
-import mongoose from 'mongoose'
 import db from '@/lib/db'
 import Post from '@/app/post/page'
 import { verifyJwtToken } from '@/lib/jwt'
 
 export const POST = async (req) => {
-  await db.connect()
-
-  const accessToken = req.headers.get('authorization')
+  const accessToken = req.headers.get('Authorization')
+  console.log(accessToken)
   const token = accessToken.split(' ')[1]
   const decodedToken = verifyJwtToken(token)
 
@@ -16,8 +14,10 @@ export const POST = async (req) => {
     })
   }
 
+  await db.connect()
   try {
     const body = await req.json()
+    console.log(body)
     const newPost = await Post.create(body)
 
     return new Response(JSON.stringify(newPost), { status: 201 })
