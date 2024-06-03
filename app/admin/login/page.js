@@ -70,9 +70,15 @@ const Login = () => {
             // variant='contained'
             className='w-full text-white rounded-3xl bg-violet-500 mt-4 px-4 py-2'
           >
-            Sign In
+            Sign in
           </button>
         </form>
+        <div
+          className='w-full bg-black text-center text-white py-2 rounded-3xl'
+          onClick={() => signIn('github')}
+        >
+          Continue with Github
+        </div>
       </div>
       <Toaster />
     </main>

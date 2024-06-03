@@ -1,15 +1,14 @@
-import db from '@/lib/db'
-import Post from '@/app/post/page'
-import { verifyJwtToken } from '@/lib/jwt'
+import db from "@/lib/db"
+import { verifyJwtToken } from "@/lib/jwt"
 
 export const POST = async (req) => {
-  const accessToken = req.headers.get('Authorization')
+  const accessToken = req.headers.get("Authorization")
   console.log(accessToken)
-  const token = accessToken.split(' ')[1]
+  const token = accessToken.split(" ")[1]
   const decodedToken = verifyJwtToken(token)
 
   if (!accessToken || !decodedToken) {
-    return new Response(JSON.stringify({ error: 'Unauthorized token!' }), {
+    return new Response(JSON.stringify({ error: "Unauthorized token!" }), {
       status: 403,
     })
   }

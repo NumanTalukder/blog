@@ -1,4 +1,5 @@
 import NextAuth from 'next-auth/next'
+import GitHubProvider from 'next-auth/providers/github'
 import CredentialsProviders from 'next-auth/providers/credentials'
 import User from '@/models/User'
 import { signJwtToken } from '@/lib/jwt'
@@ -7,6 +8,11 @@ import db from '@/lib/db'
 
 const handler = NextAuth({
   providers: [
+    GitHubProvider({
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+    }),
+
     CredentialsProviders({
       type: 'credentials',
       credentials: {

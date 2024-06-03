@@ -1,4 +1,4 @@
-import { Schema, models, model } from 'mongoose'
+import { Schema, models, model } from "mongoose"
 
 const PostSchema = new Schema(
   {
@@ -6,6 +6,12 @@ const PostSchema = new Schema(
       type: String,
       required: true,
     },
+    image: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
     category: {
       type: String,
       required: true,
@@ -16,10 +22,10 @@ const PostSchema = new Schema(
     },
     author: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
     },
   },
   { timestamps: true }
 )
 
-export default models?.Post || model('Post', PostSchema)
+export default models?.Post || model("Post", PostSchema)
